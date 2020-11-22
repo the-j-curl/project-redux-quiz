@@ -1,59 +1,59 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 // Change these to your own questions!
 const questions = [
   {
     id: 1,
-    questionText: '1991 what was the most popular Christmas gift?',
+    questionText: "In 1991 what was the most popular Christmas gift?",
     options: [
-      'Nintendo Game Boy (no color)',
-      'Sushi sticks',
-      'Boombox',
-      'Coca Cola fridge'
+      "Nintendo Game Boy",
+      "Sushi sticks",
+      "Boombox",
+      "Coca Cola fridge",
     ],
     correctAnswerIndex: 0,
-    image: './assets/NirvanaNevermindalbumcover.jpg',
-    altText: 'Nirvana cover'
+    image: "./assets/NirvanaNevermindalbumcover.jpg",
+    altText: "Nirvana cover",
   },
   {
     id: 2,
     questionText:
-      'At what year was the Portable Cassette Player Recorder the Christmas gift of the year?',
-    options: ['1981', '1979', '1975', '1997'],
+      "What year was the Portable Cassette Player Recorder the Christmas gift of the year?",
+    options: ["1981", "1979", "1975", "1997"],
     correctAnswerIndex: 2,
-    image: './assets/Portable-Cassette-Player-Recorder.jpg',
-    altText: 'Portable Cassette Player Recorder'
+    image: "./assets/Portable-Cassette-Player-Recorder.jpg",
+    altText: "Portable Cassette Player Recorder",
   },
   {
     id: 3,
-    questionText: 'In 1988 what was the most popular Christmas gift?',
+    questionText: "In 1988 what was the most popular Christmas gift?",
     options: [
-      'Polly pocket',
-      'Ghostbusters: Proton Pack and Wand',
-      'R2-D2 Toy Box',
-      'Lego airport'
+      "Polly pocket",
+      "Ghostbusters: Proton Pack and Wand",
+      "R2-D2 Toy Box",
+      "Lego airport",
     ],
     correctAnswerIndex: 1,
-    image: './assets/Turtles.jpg',
-    altText: 'Turtles'
+    image: "./assets/Turtles.jpg",
+    altText: "Turtles",
   },
   {
     id: 4,
     questionText:
-      'What year was Optimus Prime the most popular Christmas present?',
-    options: ['1981', '1984', '1987', '1990'],
+      "What year was Optimus Prime the most popular Christmas present?",
+    options: ["1981", "1984", "1987", "1990"],
     correctAnswerIndex: 1,
-    image: './assets/optimusprime.jpg',
-    altText: 'Optimus Prime'
+    image: "./assets/optimusprime.jpg",
+    altText: "Optimus Prime",
   },
   {
     id: 5,
-    questionText: 'What was the Christmas gift of the year in 1979?',
-    options: ['Monopoly', 'BMX bike', 'The Millennium Falcon', 'The Batmobile'],
+    questionText: "What was the Christmas gift of the year in 1979?",
+    options: ["Monopoly", "BMX bike", "The Millennium Falcon", "The Batmobile"],
     correctAnswerIndex: 2,
-    image: './assets/christmas1979.jpg',
-    altText: 'Family Christmas 1979'
-  }
+    image: "./assets/christmas1979.jpg",
+    altText: "Family Christmas 1979",
+  },
 ];
 
 const initialState = {
@@ -61,11 +61,12 @@ const initialState = {
   answers: [],
   currentQuestionIndex: 0,
   quizOver: false,
-  quizStarted: false
+  quizStarted: false,
+  quizScore: 0,
 };
 
 export const quiz = createSlice({
-  name: 'quiz',
+  name: "quiz",
   initialState,
   reducers: {
     /**
@@ -85,11 +86,11 @@ export const quiz = createSlice({
      */
     submitAnswer: (state, action) => {
       const { questionId, answerIndex } = action.payload;
-      const question = state.questions.find((q) => q.id === questionId);
+      const question = state.questions.find(q => q.id === questionId);
 
       if (!question) {
         throw new Error(
-          'Could not find question! Check to make sure you are passing the question id correctly.'
+          "Could not find question! Check to make sure you are passing the question id correctly."
         );
       }
 
@@ -104,7 +105,7 @@ export const quiz = createSlice({
         answerIndex,
         question,
         answer: question.options[answerIndex],
-        isCorrect: question.correctAnswerIndex === answerIndex
+        isCorrect: question.correctAnswerIndex === answerIndex,
       });
     },
 
@@ -115,7 +116,7 @@ export const quiz = createSlice({
      *
      * This action does not require a payload.
      */
-    goToNextQuestion: (state) => {
+    goToNextQuestion: state => {
       if (state.currentQuestionIndex + 1 === state.questions.length) {
         state.quizOver = true;
       } else {
@@ -139,8 +140,16 @@ export const quiz = createSlice({
      *
      * This action does not require a payload.
      */
-    startQuiz: (state) => {
+    startQuiz: state => {
       state.quizStarted = true;
-    }
-  }
+    },
+
+    /*calculateQuizScore: (state) => {
+      if (state.quiz.answers[].isCorrect) {
+        quizScore += 100
+      } else {
+        quizScore -= 100
+      }
+    }*/
+  },
 });

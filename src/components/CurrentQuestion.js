@@ -1,19 +1,19 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { quiz } from 'reducers/quiz';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { quiz } from "reducers/quiz";
 
-import { ProgressBar } from './ProgressBar';
+import { ProgressBar } from "./ProgressBar";
 
-export const CurrentQuestion = () => {
+export const CurrentQuestion = ({ quizScore }) => {
   const dispatch = useDispatch();
   const question = useSelector(
-    (state) => state.quiz.questions[state.quiz.currentQuestionIndex]
+    state => state.quiz.questions[state.quiz.currentQuestionIndex]
   );
-  const quizOver = useSelector((state) => state.quiz.quizOver);
-  const answer = useSelector((state) =>
-    state.quiz.answers.find((a) => a.questionId === question.id)
+  const quizOver = useSelector(state => state.quiz.quizOver);
+  const answer = useSelector(state =>
+    state.quiz.answers.find(a => a.questionId === question.id)
   );
-  const quizStarted = useSelector((state) => state.quiz.quizStarted);
+  const quizStarted = useSelector(state => state.quiz.quizStarted);
 
   if (!question) {
     return <h1>Oh no! I could not find the current question!</h1>;
@@ -37,20 +37,21 @@ export const CurrentQuestion = () => {
                 disabled={answer}
                 className={
                   !answer
-                    ? 'question__default--button'
+                    ? "question__default--button"
                     : index === question.correctAnswerIndex
-                    ? 'question__right--button'
-                    : 'question__wrong--button'
+                    ? "question__right--button"
+                    : "question__wrong--button"
                 }
                 type="button"
                 onClick={() =>
                   dispatch(
                     quiz.actions.submitAnswer({
                       questionId: question.id,
-                      answerIndex: index
+                      answerIndex: index,
                     })
                   )
-                }>
+                }
+              >
                 {option}
               </button>
             ))}
@@ -60,7 +61,8 @@ export const CurrentQuestion = () => {
             className="question__next--button"
             type="button"
             disabled={!answer}
-            onClick={() => dispatch(quiz.actions.goToNextQuestion())}>
+            onClick={() => dispatch(quiz.actions.goToNextQuestion())}
+          >
             Next Question
           </button>
         </section>
