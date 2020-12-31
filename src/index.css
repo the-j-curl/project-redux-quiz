@@ -61,6 +61,7 @@ span {
 
 .question {
   justify-content: space-between;
+  height: 85vh;
 }
 
 .summary,
@@ -163,7 +164,7 @@ span {
   }
 
   .question__buttons {
-    width: 400px;
+    width: 666px;
     align-self: center;
     margin: 5px 0;
   }

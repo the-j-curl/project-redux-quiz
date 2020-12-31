@@ -64,9 +64,9 @@ export const Summary = () => {
             {` ${answer.length}`} out of {questionArray.length} questions
             correct.
           </p>
-          <p className="summary__text">
+          {/* <p className="summary__text">
             Your total score is: {calculateQuizScore(answers)}
-          </p>
+          </p> */}
           <button
             className="summary__restart--button"
             type="button"
