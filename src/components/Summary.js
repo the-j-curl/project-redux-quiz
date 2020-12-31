@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "reducers/quiz";
 
 export const Summary = () => {
-  const [quizScore, setQuizScore] = useState(0);
-  const answers = useSelector(state => state.quiz.answers);
+  // const [quizScore, setQuizScore] = useState(0);
+  // const answers = useSelector(state => state.quiz.answers);
   const dispatch = useDispatch();
   const quizOver = useSelector(state => state.quiz.quizOver);
   const answer = useSelector(state =>

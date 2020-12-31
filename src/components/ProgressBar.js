@@ -5,7 +5,6 @@ export const ProgressBar = () => {
   const [quizScore, setQuizScore] = useState(0);
 
   const answers = useSelector(state => state.quiz.answers);
-  console.log(answers);
 
   useEffect(() => {
     calculateQuizScore();
@@ -14,12 +13,12 @@ export const ProgressBar = () => {
   const calculateQuizScore = () => {
     answers.map(item => {
       if (item.isCorrect) {
-        setQuizScore(quizScore + 100);
+        return setQuizScore(quizScore + 100);
       } else {
         if (quizScore <= 0) {
-          setQuizScore(0);
+          return setQuizScore(0);
         } else {
-          setQuizScore(quizScore - 100);
+          return setQuizScore(quizScore - 100);
         }
       }
     });
